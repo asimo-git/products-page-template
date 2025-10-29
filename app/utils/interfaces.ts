@@ -19,4 +19,5 @@ export interface ProductsState {
   likedItems: number[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
+  filter: "all" | "liked";
 }

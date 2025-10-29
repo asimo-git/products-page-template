@@ -4,13 +4,13 @@ import CardButtonBar from "./CardButtonBar";
 
 export default function ProductCard({ productInfo }: { productInfo: Product }) {
   return (
-    <div className="min-h-80 max-w-lg basis-96 grow p-2 flex flex-col sm:flex-row items-center rounded-xl  bg-accent transition-transform transform hover:scale-105 duration-300 ease-in-out">
+    <div className="h-64 max-w-lg basis-96 grow p-2 flex flex-col sm:flex-row items-center rounded-xl  bg-accent transition-transform transform hover:scale-105 duration-300 ease-in-out">
       <div className="flex-shrink-0">
         <Image
           src={productInfo.image}
           alt={productInfo.name}
-          width={300}
-          height={300}
+          width={240}
+          height={240}
         />
       </div>
       <div className="h-full p-2 flex flex-col flex-grow items-center justify-between text-center">

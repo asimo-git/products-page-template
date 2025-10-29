@@ -1,28 +1,28 @@
 "use client";
 
-import { createSelector } from "@reduxjs/toolkit";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
-
-const selectCartItemsCount = createSelector(
-  (state: RootState) => state.cart.items,
-  (items) => Object.keys(items).length
-);
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../redux/store";
+import { setFilter } from "../redux/productsSlice";
 
 export default function Navigation() {
-  const itemsCount = useSelector(selectCartItemsCount);
-  const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { filter } = useSelector((state: RootState) => state.products);
 
   return (
-    <button className="btn relative" onClick={() => router.push("/cart")}>
-      <Image src={"/cart.svg"} alt="cart" width={30} height={30} />{" "}
-      {itemsCount > 0 && (
-        <span className="absolute -top-1.5 -right-1.5 bg-accentHover text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
-          {itemsCount}
-        </span>
-      )}
-    </button>
+    <div>
+      <label htmlFor="filter" className="mr-2 font-medium">
+        Show:
+      </label>
+      <select
+        id="filter"
+        value={filter}
+        onChange={(e) => dispatch(setFilter(e.target.value as "all" | "liked"))}
+        className="border rounded px-3 py-2 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-600"
+      >
+        <option value="all">All</option>
+        <option value="liked">Liked</option>
+      </select>
+    </div>
   );
 }

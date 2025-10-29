@@ -14,6 +14,7 @@ const initialState: ProductsState = {
   likedItems: [],
   status: "idle",
   error: null,
+  filter: "all",
 };
 
 const productsSlice = createSlice({
@@ -32,6 +33,9 @@ const productsSlice = createSlice({
     removeItem(state, action: PayloadAction<number>) {
       state.items = state.items.filter((item) => item.id !== action.payload);
       state.likedItems = state.likedItems.filter((id) => id !== action.payload);
+    },
+    setFilter(state, action: PayloadAction<"all" | "liked">) {
+      state.filter = action.payload;
     },
     // hydrate: (state, action: PayloadAction<CartState>) => {
     //   return action.payload;
@@ -54,6 +58,6 @@ const productsSlice = createSlice({
   },
 });
 
-export const { toggleLike, removeItem } = productsSlice.actions;
+export const { toggleLike, removeItem, setFilter } = productsSlice.actions;
 
 export default productsSlice.reducer;

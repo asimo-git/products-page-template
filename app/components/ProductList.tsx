@@ -10,7 +10,9 @@ import { PageState } from "./PageState";
 export default function ProductList() {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { items } = useSelector((state: RootState) => state.products);
+  const { items, filter, likedItems } = useSelector(
+    (state: RootState) => state.products
+  );
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -21,9 +23,15 @@ export default function ProductList() {
       <PageState />
 
       <div className="w-full flex justify-evenly gap-5 flex-wrap">
-        {items.map((item) => (
-          <ProductCard key={item.id} productInfo={item} />
-        ))}
+        {filter === "all"
+          ? items.map((item) => (
+              <ProductCard key={item.id} productInfo={item} />
+            ))
+          : likedItems.length === 0
+          ? "The favorites list is empty"
+          : items
+              .filter((item) => likedItems.includes(item.id))
+              .map((item) => <ProductCard key={item.id} productInfo={item} />)}
       </div>
     </>
   );
