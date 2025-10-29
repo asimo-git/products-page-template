@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ProductsState } from "../utils/interfaces";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -11,6 +11,7 @@ export const fetchProducts = createAsyncThunk("products/fetchAll", async () => {
 
 const initialState: ProductsState = {
   items: [],
+  likedItems: [],
   status: "idle",
   error: null,
 };
@@ -19,6 +20,19 @@ const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
+    toggleLike(state, action: PayloadAction<number>) {
+      const index = state.likedItems.indexOf(action.payload);
+
+      if (index === -1) {
+        state.likedItems.push(action.payload);
+      } else {
+        state.likedItems.splice(index, 1);
+      }
+    },
+    removeItem(state, action: PayloadAction<number>) {
+      state.items = state.items.filter((item) => item.id !== action.payload);
+      state.likedItems = state.likedItems.filter((id) => id !== action.payload);
+    },
     // hydrate: (state, action: PayloadAction<CartState>) => {
     //   return action.payload;
     // },
@@ -40,6 +54,6 @@ const productsSlice = createSlice({
   },
 });
 
-// export const {  } = productsSlice.actions;
+export const { toggleLike, removeItem } = productsSlice.actions;
 
 export default productsSlice.reducer;

@@ -1,51 +1,34 @@
 "use client";
 
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, removeItem } from "../redux/cartSlice";
 import { RootState } from "../redux/store";
-import { CartItem, Product } from "../utils/interfaces";
+import { Product } from "../utils/interfaces";
+import { Heart } from "lucide-react";
+import { Trash2 } from "lucide-react";
+import { removeItem, toggleLike } from "../redux/productsSlice";
 
 export default function CardButtonBar({ product }: { product: Product }) {
-  const [showPrice, setShowPrice] = useState(false);
   const dispatch = useDispatch();
-  const itemInCart = useSelector(
-    (state: RootState) => state.cart.items[product.id]
+  const likedItems = useSelector(
+    (state: RootState) => state.products.likedItems
   );
-
-  const toggleCartItem = () => {
-    if (itemInCart) {
-      dispatch(removeItem(product.id));
-    } else {
-      const newItem: CartItem = {
-        ...product,
-        quantity: 1,
-      };
-
-      dispatch(addItem(newItem));
-    }
-  };
 
   return (
     <div>
       <button
-        className="btn btn-card my-2 w-40"
-        onClick={() => setShowPrice((prev) => !prev)}
-      >
-        {showPrice ? "Скрыть цену" : "Показать цену"}
-      </button>
-      <div
-        className={`overflow-hidden transition-all duration-1000 ease-in-out ${
-          showPrice ? "max-h-20 opacity-100" : "max-h-0 opacity-0"
+        className={`btn btn-card m-2 ${
+          likedItems.includes(product.id) && "btn-active"
         }`}
+        onClick={() => dispatch(toggleLike(product.id))}
       >
-        <div className="pb-2 rounded-md shadow-sm">Цена: {product.price}</div>
-      </div>
+        <Heart />
+      </button>
+
       <button
-        className={`btn w-40 ${itemInCart ? "btn-in-cart" : "btn-card"}`}
-        onClick={toggleCartItem}
+        className="btn btn-card"
+        onClick={() => dispatch(removeItem(product.id))}
       >
-        {itemInCart ? "В корзине ✓" : "В корзину"}
+        <Trash2 />
       </button>
     </div>
   );
