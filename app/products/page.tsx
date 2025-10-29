@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { AppDispatch, RootState } from "../redux/store";
 import { fetchProducts } from "../redux/productsSlice";
-import ProductCard from "./ProductCard";
-import { PageState } from "./PageState";
+import ProductCard from "../components/ProductCard";
+import { PageState } from "../components/PageState";
 
 export default function ProductList() {
   const dispatch = useDispatch<AppDispatch>();

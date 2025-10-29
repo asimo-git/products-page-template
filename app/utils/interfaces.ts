@@ -6,12 +6,22 @@ export interface CartState {
   items: Record<number, CartItem>;
 }
 
+interface LocationInfo {
+  name: string;
+  url: string;
+}
+
 export interface Product {
   id: number;
   name: string;
-  image: string;
-  species: string;
   status: string;
+  species: string;
+  type: string;
+  gender: string;
+  origin: LocationInfo;
+  location: LocationInfo;
+  image: string;
+  episode: string[];
 }
 
 export interface ProductsState {

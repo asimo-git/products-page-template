@@ -19,14 +19,20 @@ export default function CardButtonBar({ product }: { product: Product }) {
         className={`btn btn-card m-2 ${
           likedItems.includes(product.id) && "btn-active"
         }`}
-        onClick={() => dispatch(toggleLike(product.id))}
+        onClick={(event) => {
+          event.stopPropagation();
+          dispatch(toggleLike(product.id));
+        }}
       >
         <Heart />
       </button>
 
       <button
         className="btn btn-card"
-        onClick={() => dispatch(removeItem(product.id))}
+        onClick={(event) => {
+          event.stopPropagation();
+          dispatch(removeItem(product.id));
+        }}
       >
         <Trash2 />
       </button>

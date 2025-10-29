@@ -1,10 +1,21 @@
+"use client";
 import Image from "next/image";
 import { Product } from "../utils/interfaces";
 import CardButtonBar from "./CardButtonBar";
+import { useRouter } from "next/navigation";
 
 export default function ProductCard({ productInfo }: { productInfo: Product }) {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/products/${productInfo.id}`);
+  };
+
   return (
-    <div className="h-64 max-w-lg basis-96 grow p-2 flex flex-col sm:flex-row items-center rounded-xl  bg-accent transition-transform transform hover:scale-105 duration-300 ease-in-out">
+    <div
+      className="h-64 max-w-lg basis-96 grow p-2 flex flex-col sm:flex-row items-center rounded-xl  bg-accent transition-transform transform hover:scale-105 duration-300 ease-in-out cursor-pointer"
+      onClick={handleClick}
+    >
       <div className="flex-shrink-0">
         <Image
           src={productInfo.image}
