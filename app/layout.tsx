@@ -34,7 +34,7 @@ export default function RootLayout({
       >
         <ReduxProvider>
           <Header />
-          <main className="flex-1 w-full flex justify-evenly flex-wrap">
+          <main className="flex-1 w-full flex justify-evenly flex-wrap p-3">
             {children}
           </main>
           <Footer />

@@ -16,11 +16,20 @@ export default function ProductList() {
   );
 
   useEffect(() => {
-    const storedItems = localStorage.getItem("products");
-    if (storedItems) {
-      const parsedItems = JSON.parse(storedItems);
-      dispatch(setProducts(parsedItems as Product[]));
-    } else {
+    try {
+      const storedItems = localStorage.getItem("products");
+
+      if (storedItems) {
+        const parsedItems = JSON.parse(storedItems);
+        if (Array.isArray(parsedItems)) {
+          dispatch(setProducts(parsedItems as Product[]));
+          return;
+        }
+      }
+
+      dispatch(fetchProducts());
+    } catch (error) {
+      console.error("Error reading from localStorage:", error);
       dispatch(fetchProducts());
     }
   }, [dispatch]);
