@@ -29,6 +29,11 @@ body {
   @apply bg-activeBtn;
 }
 
+input,
+select {
+  @apply text-black;
+}
+
 .loader {
   width: 50px;
   padding: 8px;

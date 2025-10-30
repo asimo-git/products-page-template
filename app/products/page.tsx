@@ -15,7 +15,9 @@ export default function ProductList() {
   );
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    if (items.length === 0) {
+      dispatch(fetchProducts());
+    }
   }, [dispatch]);
 
   return (

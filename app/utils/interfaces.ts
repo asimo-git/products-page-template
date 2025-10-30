@@ -8,7 +8,7 @@ export interface CartState {
 
 interface LocationInfo {
   name: string;
-  url: string;
+  url?: string;
 }
 
 export interface Product {
@@ -16,7 +16,6 @@ export interface Product {
   name: string;
   status: string;
   species: string;
-  type: string;
   gender: string;
   origin: LocationInfo;
   location: LocationInfo;
@@ -30,4 +29,15 @@ export interface ProductsState {
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
   filter: "all" | "liked";
+}
+
+export interface NewProductFormData {
+  name: string;
+  image: string;
+  species: string;
+  status: string;
+  gender: string;
+  origin: string;
+  location: string;
+  episode: string;
 }

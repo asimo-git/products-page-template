@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ProductsState } from "../utils/interfaces";
+import { NewProductFormData, ProductsState } from "../utils/interfaces";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchProducts = createAsyncThunk("products/fetchAll", async () => {
@@ -37,6 +37,24 @@ const productsSlice = createSlice({
     setFilter(state, action: PayloadAction<"all" | "liked">) {
       state.filter = action.payload;
     },
+    addNewItem(state, action: PayloadAction<NewProductFormData>) {
+      const newItem = {
+        name: action.payload.name,
+        status: action.payload.status,
+        species: action.payload.species,
+        gender: action.payload.gender,
+        origin: { name: action.payload.origin },
+        location: { name: action.payload.location },
+        image: action.payload.image,
+        episode: action.payload.episode
+          .split(",")
+          .map((n) => n.trim())
+          .filter(Boolean)
+          .map((n) => `https://rickandmortyapi.com/api/episode/${n}`),
+        id: state.items.length + 1,
+      };
+      state.items.push(newItem);
+    },
     // hydrate: (state, action: PayloadAction<CartState>) => {
     //   return action.payload;
     // },
@@ -58,6 +76,7 @@ const productsSlice = createSlice({
   },
 });
 
-export const { toggleLike, removeItem, setFilter } = productsSlice.actions;
+export const { toggleLike, removeItem, setFilter, addNewItem } =
+  productsSlice.actions;
 
 export default productsSlice.reducer;

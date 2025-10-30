@@ -16,7 +16,7 @@ export default function DisplayFilter() {
         id="filter"
         value={filter}
         onChange={(e) => dispatch(setFilter(e.target.value as "all" | "liked"))}
-        className="border rounded px-3 py-2 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-600"
+        className="border rounded h-10 px-3 py-2 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-600"
       >
         <option value="all">All</option>
         <option value="liked">Liked</option>
