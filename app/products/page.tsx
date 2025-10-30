@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useEffect } from "react";
 import { AppDispatch, RootState } from "../redux/store";
-import { fetchProducts } from "../redux/productsSlice";
+import { fetchProducts, setProducts } from "../redux/productsSlice";
 import ProductCard from "../components/ProductCard";
 import { PageState } from "../components/PageState";
+import { Product } from "../utils/interfaces";
 
 export default function ProductList() {
   const dispatch = useDispatch<AppDispatch>();
@@ -15,10 +16,20 @@ export default function ProductList() {
   );
 
   useEffect(() => {
-    if (items.length === 0) {
+    const storedItems = localStorage.getItem("products");
+    if (storedItems) {
+      const parsedItems = JSON.parse(storedItems);
+      dispatch(setProducts(parsedItems as Product[]));
+    } else {
       dispatch(fetchProducts());
     }
   }, [dispatch]);
+
+  useEffect(() => {
+    if (items.length > 0) {
+      localStorage.setItem("products", JSON.stringify(items));
+    }
+  }, [items]);
 
   return (
     <>
