@@ -13,7 +13,7 @@ export default function ProductCard({ productInfo }: { productInfo: Product }) {
 
   return (
     <div
-      className="h-64 max-w-lg basis-96 grow p-2 flex flex-col sm:flex-row items-center
+      className=" max-w-lg basis-96 grow p-2 flex flex-col sm:flex-row items-center
              rounded-xl bg-accent transition-colors duration-300 ease-in-out cursor-pointer
              border-2 border-transparent hover:border-activeBtn"
       onClick={handleClick}

@@ -8,7 +8,14 @@ export default function Header() {
       <div>
         <h1 className="font-[family-name:var(--font-title)] text-4xl">
           <Link href="/">
-            <Image src={"/logo.png"} alt="logo" width={300} height={60} />
+            <Image
+              src={"/logo.png"}
+              alt="logo"
+              width={300}
+              height={60}
+              priority
+              className="h-auto w-64"
+            />
           </Link>
         </h1>
       </div>

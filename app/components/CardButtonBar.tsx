@@ -16,9 +16,7 @@ export default function CardButtonBar({ product }: { product: Product }) {
   return (
     <div>
       <button
-        className={`btn btn-card m-2 ${
-          likedItems.includes(product.id) && "btn-active"
-        }`}
+        className={` m-2 ${likedItems.includes(product.id) && "btn-active"}`}
         onClick={(event) => {
           event.stopPropagation();
           dispatch(toggleLike(product.id));
@@ -28,7 +26,6 @@ export default function CardButtonBar({ product }: { product: Product }) {
       </button>
 
       <button
-        className="btn btn-card"
         onClick={(event) => {
           event.stopPropagation();
           dispatch(removeItem(product.id));

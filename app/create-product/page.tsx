@@ -171,10 +171,7 @@ export default function CreateProductPage() {
             )}
           </label>
 
-          <button
-            type="submit"
-            className="mt-4 bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-700 transition"
-          >
+          <button type="submit" className="mt-4">
             Create
           </button>
         </form>
