@@ -5,6 +5,15 @@ const nextConfig = {
   images: {
     domains: ["rickandmortyapi.com"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/products",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
