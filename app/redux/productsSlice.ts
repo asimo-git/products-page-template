@@ -1,9 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {
-  NewProductFormData,
-  Product,
-  ProductsState,
-} from "../utils/interfaces";
+import { NewProductFormData, ProductsState } from "../utils/interfaces";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchProducts = createAsyncThunk("products/fetchAll", async () => {
@@ -59,8 +55,8 @@ const productsSlice = createSlice({
       };
       state.items.push(newItem);
     },
-    setProducts(state, action: PayloadAction<Product[]>) {
-      state.items = action.payload;
+    hydrate: (_, action: PayloadAction<ProductsState>) => {
+      return action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -80,7 +76,7 @@ const productsSlice = createSlice({
   },
 });
 
-export const { toggleLike, removeItem, setFilter, addNewItem, setProducts } =
+export const { toggleLike, removeItem, setFilter, addNewItem } =
   productsSlice.actions;
 
 export default productsSlice.reducer;

@@ -1,44 +1,13 @@
 "use client";
-import { useDispatch, useSelector } from "react-redux";
-
-import { useEffect } from "react";
-import { AppDispatch, RootState } from "../redux/store";
-import { fetchProducts, setProducts } from "../redux/productsSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 import ProductCard from "../components/ProductCard";
 import { PageState } from "../components/PageState";
-import { Product } from "../utils/interfaces";
 
 export default function ProductList() {
-  const dispatch = useDispatch<AppDispatch>();
-
   const { items, filter, likedItems } = useSelector(
     (state: RootState) => state.products
   );
-
-  useEffect(() => {
-    try {
-      const storedItems = localStorage.getItem("products");
-
-      if (storedItems) {
-        const parsedItems = JSON.parse(storedItems);
-        if (Array.isArray(parsedItems)) {
-          dispatch(setProducts(parsedItems as Product[]));
-          return;
-        }
-      }
-
-      dispatch(fetchProducts());
-    } catch (error) {
-      console.error("Error reading from localStorage:", error);
-      dispatch(fetchProducts());
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (items.length > 0) {
-      localStorage.setItem("products", JSON.stringify(items));
-    }
-  }, [items]);
 
   return (
     <>
