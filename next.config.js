@@ -1,6 +1,7 @@
-import type { NextConfig } from "next";
+// next.config.mjs
+/** @type {import('next').NextConfig} */
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   images: {
     domains: ["rickandmortyapi.com"],
   },
